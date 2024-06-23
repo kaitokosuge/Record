@@ -1,35 +1,49 @@
 import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import "./index.css";
 
 function App() {
-	const [count, setCount] = useState(0);
 	const [data, setData] = useState<any>();
+	const [isLoad, setIsLoad] = useState(false);
 	const getMovieData = async () => {
+		const resCms = await fetch(
+			"https://os1eystqtr.microcms.io/api/v1/record/mi-dead-reckoning",
+			{
+				headers: {
+					"X-MICROCMS-API-KEY": "m0h2ioE86NpgvxgjKmUHyZme8UaRZEGgul9Y",
+				},
+			}
+		);
+		const dataCms = await resCms.json();
 		const res = await fetch(
-			`https://api.themoviedb.org/3/movie/335984?api_key=${
+			`https://api.themoviedb.org/3/movie/${dataCms.tmdb_id}?api_key=${
 				import.meta.env.VITE_TMBD_KEY
 			}&language=en`
 		);
+		console.log("hello2");
 		const data = await res.json();
-		console.log("映画のデータだよ", data);
 		setData(data);
+		setIsLoad(true);
 	};
 	useEffect(() => {
 		getMovieData();
 	}, []);
 	return (
 		<>
-			<div style={{ display: "flex", width: "100%" }}>
-				<img
-					src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${data.poster_path}`}
-					style={{ width: "170px", display: "block" }}
-				/>
-				<p style={{ color: "white", fontSize: "70px", fontWeight: "bold" }}>
-					{data.title}
-				</p>
-			</div>
+			{isLoad && (
+				<>
+					<div style={{ display: "flex", width: "100%" }}>
+						<img
+							src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${data.poster_path}`}
+							style={{ width: "170px", display: "block" }}
+						/>
+						<p
+							// style={{ color: "white", fontSize: "70px", fontWeight: "bold" }}
+							className="text-red-500 block w-full">
+							{data.title}
+						</p>
+					</div>
+				</>
+			)}
 		</>
 	);
 }
