@@ -13,12 +13,15 @@ function App() {
 				},
 			}
 		);
+		console.log("0", resCms);
 		const dataCms = await resCms.json();
+		console.log("1", dataCms);
 		const res = await fetch(
 			`https://api.themoviedb.org/3/movie/${dataCms.tmdb_id}?api_key=${
 				import.meta.env.VITE_TMBD_KEY
 			}&language=en`
 		);
+		console.log("1の後ならOK", res);
 		console.log("hello2");
 		const data = await res.json();
 		setData(data);
