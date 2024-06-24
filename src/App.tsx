@@ -1,35 +1,53 @@
-import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import { useMicroCmsPostsQuery } from "./api/controllers/useMicroCmsPostsQuery";
+import Header from "./components/Header/Header";
+import MainVisual from "./features/MainVisual";
+import PostCard from "./features/PostCard";
 
 function App() {
-	const [count, setCount] = useState(0);
-	const [data, setData] = useState<any>();
-	const getMovieData = async () => {
-		const res = await fetch(
-			`https://api.themoviedb.org/3/movie/335984?api_key=${
-				import.meta.env.VITE_TMBD_KEY
-			}&language=en`
+	const { data, isLoading, isError } = useMicroCmsPostsQuery();
+	if (isLoading) {
+		return (
+			<>
+				<Header />
+				<main>
+					<MainVisual />
+					<p className="text-blue-200 mt-40 w-4/5 m-auto">
+						記事を取得しています
+					</p>
+				</main>
+			</>
 		);
-		const data = await res.json();
-		console.log("映画のデータだよ", data);
-		setData(data);
-	};
-	useEffect(() => {
-		getMovieData();
-	}, []);
+	}
+	if (isError) {
+		return (
+			<>
+				<Header />
+				<main>
+					<MainVisual />
+					<p className="mt-40">記事データの取得に失敗しました</p>
+				</main>
+			</>
+		);
+	}
 	return (
 		<>
-			<div style={{ display: "flex", width: "100%" }}>
-				<img
-					src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${data.poster_path}`}
-					style={{ width: "170px", display: "block" }}
-				/>
-				<p style={{ color: "white", fontSize: "70px", fontWeight: "bold" }}>
-					{data.title}
-				</p>
-			</div>
+			<Header />
+			<main className="pb-20">
+				<MainVisual />
+				<section className="mt-40">
+					{data === undefined || data === null ? (
+						<>
+							<p>データが存在しませんでした</p>
+						</>
+					) : (
+						<>
+							{data.contents.map((post, index: number) => (
+								<PostCard record={post} key={index} />
+							))}
+						</>
+					)}
+				</section>
+			</main>
 		</>
 	);
 }
