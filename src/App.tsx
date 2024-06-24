@@ -1,4 +1,5 @@
 import { useMicroCmsPostsQuery } from "./api/controllers/useMicroCmsPostsQuery";
+import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import MainVisual from "./features/MainVisual";
 import PostCard from "./features/PostCard";
@@ -15,6 +16,7 @@ function App() {
 						記事を取得しています
 					</p>
 				</main>
+				<Footer />
 			</>
 		);
 	}
@@ -26,6 +28,7 @@ function App() {
 					<MainVisual />
 					<p className="mt-40">記事データの取得に失敗しました</p>
 				</main>
+				<Footer />
 			</>
 		);
 	}
@@ -48,6 +51,7 @@ function App() {
 					)}
 				</section>
 			</main>
+			<Footer />
 		</>
 	);
 }

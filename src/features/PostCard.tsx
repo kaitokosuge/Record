@@ -3,6 +3,15 @@ import { MicroCmsPost } from "../api/repositories/microCmsPosts";
 
 export default function PostCard({ record }: { record: MicroCmsPost }) {
 	const { data, isLoading, isError } = useMovieDataQuery(record.tmdb_id);
+	if (isError) {
+		return (
+			<>
+				<p className="text-blue-200 m-auto mt-10 w-4/5 min-h-40">
+					映画データの取得に失敗しました
+				</p>
+			</>
+		);
+	}
 	if (isLoading) {
 		return (
 			<>
@@ -33,9 +42,9 @@ export default function PostCard({ record }: { record: MicroCmsPost }) {
 						<span className="text-xl">comment: </span>
 						{record.comment}
 					</p>
-					<button className="absolute right-0 w-[200px] px-10 py-[10px] rounded-md text-white mt-5 text-xl border border-gray-500">
+					{/* <button className="absolute right-0 w-[200px] px-10 py-[10px] rounded-md text-white mt-5 text-xl border border-gray-500">
 						more
-					</button>
+					</button> */}
 				</div>
 			</div>
 		</article>
