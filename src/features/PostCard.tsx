@@ -25,12 +25,12 @@ export default function PostCard({ record }: { record: MicroCmsPost }) {
 		<article className="text-gray-300 m-auto mt-20 w-4/5 relative">
 			<div className="flex">
 				<img
-					className="w-[150px]"
+					className="w-[100px] md:w-[150px] md:max-h-[225px] max-h-[150px]"
 					src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${data?.poster_path}`}
 				/>
-				<div className="ml-10">
-					<h2 className="text-4xl font-bold">{data?.title}</h2>
-					<p className="text-xl mt-5">
+				<div className="md:ml-10 ml-1">
+					<h2 className="text-xl md:text-4xl font-bold">{data?.title}</h2>
+					<p className="text-xl md:mt-5 mt-1">
 						<span className="text-md text-gray-500">release_day:</span>
 						{data?.release_date}
 					</p>
