@@ -13,9 +13,10 @@ src
 │   └── repositories (データベースへの問い合わせ)
 ├── components (汎用UIコンポーネント)
 │    ├── Button.tsx
-│    └── PostCard.tsx ...
+│    └── Title.tsx ...
+├── features (ページ・機能独自コンポーネント)
 ├── libs (ライブラリ独自の記述)
-├── pages (ページ単位UIコンポーネント)
+├── pages (ページトップUIコンポーネント)
 ├── test (テスト)
 ├── utils (汎用的な関数)
 └── App.tsx(ルーター、コンテキスト管理)
