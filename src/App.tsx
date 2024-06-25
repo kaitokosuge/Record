@@ -42,7 +42,7 @@ function App() {
 				<section className="mt-40">
 					{data === undefined || data === null ? (
 						<>
-							<p>データが存在しませんでした</p>
+							<p>記事が公開されていません</p>
 						</>
 					) : (
 						<>
