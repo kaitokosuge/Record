@@ -26,7 +26,9 @@ function App() {
 				<Header />
 				<main>
 					<MainVisual />
-					<p className="mt-40">記事データの取得に失敗しました</p>
+					<p className="mt-40 text-red-300 w-4/5 m-auto">
+						記事データの取得に失敗しました。再読み込みを行うか、時間を置いて再度ご操作ください。
+					</p>
 				</main>
 				<Footer />
 			</>

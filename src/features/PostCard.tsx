@@ -3,20 +3,20 @@ import { MicroCmsPost } from "../api/repositories/microCmsPosts";
 
 export default function PostCard({ record }: { record: MicroCmsPost }) {
 	const { data, isLoading, isError } = useMovieDataQuery(record.tmdb_id);
-	if (isError) {
-		return (
-			<>
-				<p className="text-blue-200 m-auto mt-10 w-4/5 min-h-40">
-					映画データの取得に失敗しました
-				</p>
-			</>
-		);
-	}
 	if (isLoading) {
 		return (
 			<>
 				<p className="text-blue-200 m-auto mt-10 w-4/5 min-h-40">
 					映画データを取得しています
+				</p>
+			</>
+		);
+	}
+	if (isError) {
+		return (
+			<>
+				<p className="text-blue-200 m-auto mt-10 w-4/5 min-h-40">
+					映画データの取得に失敗しました。再読み込みを行うか、時間を置いてご操作ください。
 				</p>
 			</>
 		);
