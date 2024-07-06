@@ -21,7 +21,7 @@ function App() {
 				<Header />
 				<main className="pb-20">
 					<MainVisual />
-					<section className="mt-40">
+					<section className="md:mt-40 mt-10">
 						{data === undefined || data === null ? (
 							<>
 								<p>記事が公開されていません</p>
@@ -65,7 +65,7 @@ function App() {
 				<Header />
 				<main>
 					<MainVisual />
-					<p className="text-blue-200 mt-40 w-4/5 m-auto">
+					<p className="text-blue-200 md:mt-40 mt-10 w-4/5 m-auto">
 						記事を取得しています
 					</p>
 				</main>
@@ -93,7 +93,7 @@ function App() {
 			<Header />
 			<main className="pb-20">
 				<MainVisual />
-				<section className="mt-40">
+				<section className="md:mt-40 mt-10">
 					{data === undefined || data === null ? (
 						<>
 							<p className="text-white">no articles</p>
@@ -108,7 +108,7 @@ function App() {
 								);
 							})}
 							<button
-								className="block text-gray-300 m-auto mt-20 w-[400px] relative"
+								className="block text-gray-300 m-auto mt-20 w-[380px] relative"
 								onClick={() => {
 									fetchNextPage();
 								}}
