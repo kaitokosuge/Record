@@ -1,16 +1,27 @@
-import { expect, test } from "vitest";
-import { render, screen } from "@testing-library/react";
-import App from "./App";
-import { createQueryClient } from "./libs/react-query/createQueryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
+import "@testing-library/jest-dom";
+import "@testing-library/jest-dom/vitest";
+import { test } from "vitest";
+import { render, screen, expect } from "@testing-library/react";
+import PostCard from "./features/PostCard";
+import { TestProvider } from "./test/TestProvider";
 
 test("render App.tsx", () => {
-	const queryClient = createQueryClient();
 	render(
-		<QueryClientProvider client={queryClient}>
-			<App />
-		</QueryClientProvider>
+		<TestProvider>
+			<PostCard
+				record={{
+					id: "test",
+					createdAt: "2024",
+					updatedAt: "",
+					publishedAt: "",
+					revisedAt: "",
+					tmdb_id: "",
+					show_day: "",
+					star: 10,
+					comment: "",
+				}}
+			/>
+		</TestProvider>
 	);
-	const loadingText = screen.getByText("記事を取得しています");
-	expect(loadingText).toBe;
+	expect(screen.getByText("release_day:")).toBeInTheDocument();
 });

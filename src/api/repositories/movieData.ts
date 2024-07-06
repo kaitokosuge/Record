@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { isNullOrUndefined } from "../../utils/isNullOrUndefined";
 
 type BelongsToCollection = {
@@ -70,7 +71,6 @@ export const getMovieData = async (tmdb_id: string): Promise<MovieData> => {
 			if (isNullOrUndefined(res)) {
 				throw Error("データが存在しません");
 			}
-			console.log(res.data);
 			return res.data;
 		});
 };

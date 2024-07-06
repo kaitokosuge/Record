@@ -1,5 +1,7 @@
 import axios from "axios";
+
 import { isNullOrUndefined } from "../../utils/isNullOrUndefined";
+
 import { MicroCmsPost } from "./microCmsPosts";
 
 export const getMicroCmsPost = async (

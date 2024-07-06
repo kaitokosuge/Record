@@ -1,4 +1,5 @@
 import { useMovieDataQuery } from "../api/controllers/useMovieDataQuery";
+
 import { MicroCmsPost } from "../api/repositories/microCmsPosts";
 
 export default function PostCard({ record }: { record: MicroCmsPost }) {
@@ -28,20 +29,15 @@ export default function PostCard({ record }: { record: MicroCmsPost }) {
 					className="w-[100px] md:w-[150px] md:max-h-[225px] max-h-[150px]"
 					src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${data?.poster_path}`}
 				/>
-				<div className="md:ml-10 ml-1">
+				<div className="md:ml-10 ml-[30px]">
 					<h2 className="text-xl md:text-4xl font-bold">{data?.title}</h2>
-					<p className="text-xl md:mt-5 mt-1">
-						<span className="text-md text-gray-500">release_day:</span>
+					<p className="md:text-xl text-sm md:mt-5 mt-1">
 						{data?.release_date}
 					</p>
-					<p className="text-xl mt-1">
-						<span className="text-sm text-gray-500">The_day_ I _saw:</span>
-						{record.show_day}
+					<p className="md:text-xl text-xs mt-1">
+						<span className="text-gray-600">show-day:{record.show_day}</span>
 					</p>
-					<p className="text-gray-600 text-[10px] mt-1">
-						<span className="text-xl">comment: </span>
-						{record.comment}
-					</p>
+					<p className="text-gray-500 text-[10px] mt-1">{record.comment}</p>
 					{/* <button className="absolute right-0 w-[200px] px-10 py-[10px] rounded-md text-white mt-5 text-xl border border-gray-500">
 						more
 					</button> */}

@@ -1,12 +1,65 @@
 import { useMicroCmsPostsQuery } from "./api/controllers/useMicroCmsPostsQuery";
+import { MicroCmsPost } from "./api/repositories/microCmsPosts";
+
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import MainVisual from "./features/MainVisual";
 import PostCard from "./features/PostCard";
 
 function App() {
-	const { data, isLoading, isError } = useMicroCmsPostsQuery();
-	if (isLoading) {
+	const {
+		data,
+		error,
+		fetchNextPage,
+		hasNextPage,
+		isFetching,
+		isFetchingNextPage,
+	} = useMicroCmsPostsQuery();
+	if (isFetchingNextPage) {
+		return (
+			<>
+				<Header />
+				<main className="pb-20">
+					<MainVisual />
+					<section className="mt-40">
+						{data === undefined || data === null ? (
+							<>
+								<p>記事が公開されていません</p>
+							</>
+						) : (
+							<>
+								{data.pages.map((page) => {
+									return page.contents.map((item: any, index: number) => (
+										<PostCard record={item} key={index} />
+									));
+								})}
+								<button
+									className="block text-gray-300 m-auto mt-20 w-[400px] relative"
+									onClick={() => {
+										fetchNextPage();
+									}}
+									disabled={!hasNextPage || isFetchingNextPage}>
+									{isFetchingNextPage ? (
+										<span className="text-4xl text-pink-700">
+											Loading more...
+										</span>
+									) : hasNextPage ? (
+										<span className="text-4xl">Load More</span>
+									) : (
+										<span className="text-4xl text-yellow-300">
+											Nothing more to load
+										</span>
+									)}
+								</button>
+							</>
+						)}
+					</section>
+				</main>
+				<Footer />
+			</>
+		);
+	}
+	if (isFetching) {
 		return (
 			<>
 				<Header />
@@ -20,7 +73,8 @@ function App() {
 			</>
 		);
 	}
-	if (isError) {
+
+	if (error) {
 		return (
 			<>
 				<Header />
@@ -42,13 +96,35 @@ function App() {
 				<section className="mt-40">
 					{data === undefined || data === null ? (
 						<>
-							<p>記事が公開されていません</p>
+							<p className="text-white">no articles</p>
 						</>
 					) : (
 						<>
-							{data.contents.map((post, index: number) => (
-								<PostCard record={post} key={index} />
-							))}
+							{data.pages.map((page) => {
+								return page.contents.map(
+									(item: MicroCmsPost, index: number) => (
+										<PostCard record={item} key={index} />
+									)
+								);
+							})}
+							<button
+								className="block text-gray-300 m-auto mt-20 w-[400px] relative"
+								onClick={() => {
+									fetchNextPage();
+								}}
+								disabled={!hasNextPage || isFetchingNextPage}>
+								{isFetchingNextPage ? (
+									<span className="text-4xl text-pink-700">
+										Loading more...
+									</span>
+								) : hasNextPage ? (
+									<span className="text-4xl">Load More</span>
+								) : (
+									<span className="text-4xl text-yellow-300">
+										Nothing more to load
+									</span>
+								)}
+							</button>
 						</>
 					)}
 				</section>
