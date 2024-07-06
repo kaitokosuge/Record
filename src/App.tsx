@@ -96,7 +96,7 @@ function App() {
 				<section className="md:mt-40 mt-10">
 					{data === undefined || data === null ? (
 						<>
-							<p className="text-white">no articles</p>
+							<p className="text-white text-4xl">no articles</p>
 						</>
 					) : (
 						<>
