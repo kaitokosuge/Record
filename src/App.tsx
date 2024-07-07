@@ -66,7 +66,7 @@ function App() {
 				<main>
 					<MainVisual />
 					<p className="text-blue-200 md:mt-40 mt-10 w-4/5 m-auto">
-						記事を取得しています
+						<span className="text-4xl text-pink-700">Loading now...</span>
 					</p>
 				</main>
 				<Footer />
